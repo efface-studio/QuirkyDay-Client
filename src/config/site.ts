@@ -14,12 +14,16 @@ export const site = {
   contactEmail: '',
 } as const
 
-/** 사이드바 / 헤더 / 푸터에서 공통으로 쓰는 네비게이션 항목. */
+/**
+ * 사이드바 / 헤더 / 푸터에서 공통으로 쓰는 네비게이션 항목.
+ * sectionId — 홈 페이지에서 같은 이름의 섹션 ID와 매칭해서
+ * scrollspy가 점을 옮길 때 사용한다.
+ */
 export const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '/about', label: 'About' },
-  { to: '/activities', label: 'Activities' },
-  { to: '/shop', label: 'Shop' },
-  { to: '/members', label: 'Members' },
-  { to: '/contact', label: 'Contact' },
+  { to: '/', label: 'Home', sectionId: 'home' },
+  { to: '/about', label: 'About', sectionId: 'about' },
+  { to: '/activities', label: 'Activities', sectionId: 'activities' },
+  { to: '/shop', label: 'Shop', sectionId: 'shop' },
+  { to: '/members', label: 'Members', sectionId: 'members' },
+  { to: '/contact', label: 'Contact', sectionId: 'contact' },
 ] as const

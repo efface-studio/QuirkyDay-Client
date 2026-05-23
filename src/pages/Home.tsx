@@ -22,7 +22,7 @@ export function Home() {
 ───────────────────────────────────────────── */
 function Hero() {
   return (
-    <section className="relative min-h-screen overflow-hidden bg-paper">
+    <section id="home" className="relative min-h-screen overflow-hidden bg-paper">
       <div className="mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pt-32">
         <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink-soft">
           <span>{site.location}</span>
@@ -72,7 +72,7 @@ function Hero() {
 ───────────────────────────────────────────── */
 function IntroSection() {
   return (
-    <section className="border-t border-ink/10 bg-paper">
+    <section id="about" className="border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
@@ -136,7 +136,7 @@ const introBlocks = [
 ───────────────────────────────────────────── */
 function ActivitiesSection() {
   return (
-    <section className="bg-ink text-paper">
+    <section id="activities" className="bg-ink text-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
@@ -218,7 +218,7 @@ function ShopSection() {
   const preview = products.slice(0, 4)
 
   return (
-    <section className="border-t border-ink/10 bg-paper">
+    <section id="shop" className="border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -294,7 +294,7 @@ function ShopSection() {
 ───────────────────────────────────────────── */
 function MembersSection() {
   return (
-    <section className="border-t border-ink/10 bg-paper-2">
+    <section id="members" className="border-t border-ink/10 bg-paper-2">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
@@ -347,7 +347,7 @@ const roles = [
 ───────────────────────────────────────────── */
 function ContactSection() {
   return (
-    <section className="border-t border-ink/10 bg-paper">
+    <section id="contact" className="border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
