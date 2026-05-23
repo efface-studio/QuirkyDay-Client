@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { AdminShell } from './AdminShell'
+import { ImageManager } from '@/components/admin/ImageManager'
 import {
   categories,
   statuses,
@@ -20,11 +21,17 @@ const blankDraft: DraftProduct = {
   status: '판매중',
   description: '',
   emoji: '👕',
+  images: [],
   options: [],
 }
 
 function toDraft(p: Product): DraftProduct {
-  return { ...p, price: String(p.price), options: p.options ?? [] }
+  return {
+    ...p,
+    price: String(p.price),
+    options: p.options ?? [],
+    images: p.images ?? [],
+  }
 }
 
 function fromDraft(d: DraftProduct): Product {
@@ -32,6 +39,7 @@ function fromDraft(d: DraftProduct): Product {
   return {
     ...d,
     price: Number.isFinite(price) ? price : 0,
+    images: d.images ?? [],
     options: d.options && d.options.length > 0 ? d.options : undefined,
   }
 }
@@ -113,11 +121,23 @@ export function AdminProducts() {
                 >
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-paper-2">
-                        {p.image ? (
-                          <img src={p.image} alt="" className="h-full w-full object-cover" />
+                      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-xl bg-paper-2">
+                        {p.images[0] ? (
+                          <img
+                            src={p.images[0]}
+                            alt=""
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
                         ) : (
-                          <span className="text-xl">{p.emoji}</span>
+                          <span className="flex h-full w-full items-center justify-center text-xl">
+                            {p.emoji}
+                          </span>
+                        )}
+                        {p.images.length > 1 && (
+                          <span className="absolute -right-1 -top-1 rounded-full bg-ink px-1.5 font-mono text-[9px] text-paper">
+                            +{p.images.length - 1}
+                          </span>
                         )}
                       </div>
                       <div className="min-w-0">
@@ -347,14 +367,13 @@ function ProductEditModal({
             />
           </Field>
 
-          <Field label="이미지 (URL, 선택)">
-            <input
-              value={draft.image ?? ''}
-              onChange={(e) =>
-                onChange({ ...draft, image: e.target.value || undefined })
-              }
-              placeholder="https://..."
-              className="input"
+          <Field
+            label={`상품 이미지${draft.images.length > 0 ? ` (${draft.images.length}장)` : ''}`}
+            full
+          >
+            <ImageManager
+              images={draft.images}
+              onChange={(images) => onChange({ ...draft, images })}
             />
           </Field>
 
