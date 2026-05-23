@@ -5,8 +5,9 @@ import { navLinks, site } from '@/config/site'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 
 /**
- * lg+ 데스크탑에서 좌측에 sticky 로 붙는 세로 nav.
- * 모바일에서는 Header(상단 햄버거)가 대체한다.
+ * lg+ 데스크탑에서 좌측에 sticky로 붙는 세로 nav.
+ * 사이드바 영역이 별도 카드처럼 보이지 않도록 — 같은 paper 배경,
+ * 본문과 비슷한 텍스트 위계, 작은 간격, 미세한 점 인디케이터.
  */
 export function Sidebar() {
   const { pathname } = useLocation()
@@ -39,16 +40,14 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="sticky top-0 hidden h-screen w-56 shrink-0 border-r border-ink/10 bg-paper lg:flex lg:flex-col">
-      <div className="flex h-full flex-col px-7 py-8">
-        <Link to="/" className="font-display text-2xl text-ink">
+    <aside className="sticky top-0 hidden h-screen w-48 shrink-0 lg:flex lg:flex-col">
+      <div className="flex h-full flex-col px-7 py-10">
+        <Link to="/" className="font-display text-lg leading-none text-ink">
           {site.name}
         </Link>
-        <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-          청소년 창업 동아리
-        </p>
+        <p className="mt-1 text-[11px] text-ink-mute">청소년 창업 동아리</p>
 
-        <nav className="mt-12 flex flex-col gap-1">
+        <nav className="mt-12 flex flex-col">
           {navLinks.map((link) => {
             const active = isLinkActive(link)
             return (
@@ -56,18 +55,11 @@ export function Sidebar() {
                 key={link.to}
                 to={link.to}
                 onClick={(e) => handleClick(e, link)}
-                className={`group relative flex items-center gap-3 rounded-xl px-3 py-2 font-en text-[15px] transition-colors ${
-                  active ? 'text-ink' : 'text-ink-soft hover:text-ink'
+                className={`group relative flex items-center gap-2.5 py-1 font-en text-sm transition-colors ${
+                  active ? 'text-ink' : 'text-ink-mute hover:text-ink'
                 }`}
               >
-                {active && (
-                  <motion.span
-                    layoutId="side-active"
-                    className="absolute inset-0 -z-10 rounded-xl bg-ink/8"
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-                  />
-                )}
-                <span className="relative inline-flex h-1.5 w-1.5 shrink-0">
+                <span className="relative inline-flex h-1 w-1 shrink-0">
                   {active && (
                     <motion.span
                       layoutId="side-dot"
@@ -75,11 +67,6 @@ export function Sidebar() {
                       transition={{ type: 'spring', stiffness: 320, damping: 28 }}
                     />
                   )}
-                  <span
-                    className={`absolute inset-0 rounded-full transition-colors ${
-                      active ? 'bg-transparent' : 'bg-transparent group-hover:bg-ink/30'
-                    }`}
-                  />
                 </span>
                 <span className={active ? 'font-medium' : undefined}>
                   {link.label}
@@ -89,22 +76,16 @@ export function Sidebar() {
           })}
         </nav>
 
-        <div className="mt-auto pt-8">
-          <p className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-            Follow
-          </p>
+        <div className="mt-auto space-y-2 pt-10 text-xs">
           <a
             href={site.instagram}
             target="_blank"
             rel="noreferrer"
-            className="mt-2 inline-flex items-center gap-2 text-sm text-ink hover:text-accent"
+            className="block text-ink-mute hover:text-accent"
           >
             IG {site.instagramHandle}
           </a>
-          <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-            Base
-          </p>
-          <p className="mt-1 text-sm text-ink-soft">{site.location}</p>
+          <p className="text-ink-mute">{site.location}</p>
         </div>
       </div>
     </aside>
