@@ -203,7 +203,13 @@ export function AdminProducts() {
 
       <AnimatePresence>
         {exportOpen && (
-          <ExportModal json={exportJson} onClose={() => setExportOpen(false)} />
+          <ExportModal
+            title="제품 카탈로그 JSON"
+            filename="quirky-products"
+            target="src/data/products.ts의 defaultProducts"
+            json={exportJson}
+            onClose={() => setExportOpen(false)}
+          />
         )}
       </AnimatePresence>
     </AdminShell>
@@ -439,10 +445,16 @@ function Field({
   )
 }
 
-function ExportModal({
+export function ExportModal({
+  title,
+  filename,
+  target,
   json,
   onClose,
 }: {
+  title: string
+  filename: string
+  target: string
   json: string
   onClose: () => void
 }) {
@@ -463,7 +475,7 @@ function ExportModal({
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = `quirky-products-${new Date().toISOString().slice(0, 10)}.json`
+    a.download = `${filename}-${new Date().toISOString().slice(0, 10)}.json`
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -491,13 +503,11 @@ function ExportModal({
             <p className="font-mono text-xs uppercase tracking-widest text-accent">
               Export
             </p>
-            <h2 className="mt-1 font-display text-2xl text-ink">
-              제품 카탈로그 JSON
-            </h2>
+            <h2 className="mt-1 font-display text-2xl text-ink">{title}</h2>
             <p className="mt-2 text-sm text-ink-soft">
-              이 내용을{' '}
+              영구 반영하려면 이 내용을{' '}
               <code className="rounded bg-paper-2 px-1 py-0.5 font-mono text-xs">
-                src/data/products.ts 의 defaultProducts
+                {target}
               </code>{' '}
               에 붙여넣고 커밋하세요.
             </p>
@@ -535,7 +545,7 @@ function ExportModal({
   )
 }
 
-const adminInputStyle = `
+export const adminInputStyle = `
   .input {
     width: 100%;
     background: var(--color-paper);
