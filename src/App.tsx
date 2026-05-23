@@ -10,6 +10,7 @@ import { NotFound } from '@/pages/NotFound'
 import { AdminLayout } from '@/pages/admin/AdminLayout'
 import { AdminDashboard } from '@/pages/admin/AdminDashboard'
 import { AdminProducts } from '@/pages/admin/AdminProducts'
+import { AdminMembers } from '@/pages/admin/AdminMembers'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path="/admin" element={<AdminLayout />}>
         <Route index element={<AdminDashboard />} />
         <Route path="products" element={<AdminProducts />} />
+        <Route path="members" element={<AdminMembers />} />
       </Route>
 
       {/* 공개 사이트 */}
