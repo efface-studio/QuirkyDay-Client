@@ -5,21 +5,22 @@ import { Reveal } from '@/components/motion/Reveal'
 import { site } from '@/config/site'
 import {
   categories,
-  products,
   type Product,
   type ProductCategory,
 } from '@/data/products'
+import { useProducts } from '@/hooks/useProducts'
 
 type Filter = 'all' | ProductCategory
 
 export function Shop() {
+  const { products } = useProducts()
   const [filter, setFilter] = useState<Filter>('all')
   const [selected, setSelected] = useState<Product | null>(null)
 
   const visible = useMemo(
     () =>
       filter === 'all' ? products : products.filter((p) => p.category === filter),
-    [filter],
+    [filter, products],
   )
 
   return (

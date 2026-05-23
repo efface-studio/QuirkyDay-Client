@@ -21,7 +21,7 @@ export interface Product {
   options?: string[]
 }
 
-export const products: Product[] = [
+export const defaultProducts: Product[] = [
   {
     id: 'tee-quirky-logo',
     name: 'Quirky 로고 티셔츠',
@@ -76,3 +76,9 @@ export const products: Product[] = [
 ]
 
 export const categories: ProductCategory[] = ['의류', '키링', '와펜', '기타']
+export const statuses: ProductStatus[] = [
+  '판매중',
+  '예약판매',
+  '재고소진',
+  '준비중',
+]
