@@ -1,0 +1,81 @@
+/* 폰트는 index.html에서 link로 직접 로드 — 첫 페인트에 맞춰 들어옴 */
+@import "tailwindcss";
+
+@theme {
+  /* ── 컬러 (절제) ────────────────────
+     · ink는 거의 검정에 가까운 어두운 톤
+     · paper는 살짝 누런 미색 (배경 기본)
+     · accent는 친근한 오렌지 한 가지
+     · lime은 액센트로 가끔만 (CTA hover 등)
+  */
+  --color-ink: #14141a;
+  --color-ink-soft: #4a4a55;
+  --color-ink-mute: #8a8a93;
+  --color-paper: #faf7f0;
+  --color-paper-2: #f1ede2;
+
+  --color-accent: #ee5b2a;        /* 친근한 오렌지 */
+  --color-accent-soft: #ffe1d2;
+  --color-accent-deep: #c54312;
+
+  --color-lime: #cbf24a;
+
+  /* ── 폰트 (귀염귀염하게) ────────────────
+     · display: Jua (둥글둥글한 한글 cute 디스플레이)
+     · sans: Pretendard (가독성 좋은 한국어 본문)
+     · display-en: DM Sans (영문 디스플레이, 둥근 형태)
+     · mono: DM Mono
+     · hand: Caveat (액센트로만)
+  */
+  --font-display: "Jua", "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-sans: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", system-ui, sans-serif;
+  --font-en: "DM Sans", "Pretendard Variable", system-ui, sans-serif;
+  --font-mono: "DM Mono", ui-monospace, Consolas, monospace;
+  --font-hand: "Caveat", "Jua", cursive;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* body에 기본 폰트 — 모든 페이지에 안전하게 적용 */
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  font-feature-settings: "ss01", "ss02";
+}
+
+/* 헤딩 기본 — h1~h3는 cute 디스플레이 폰트 */
+h1, h2, h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* 선택영역 컬러 */
+::selection {
+  background: var(--color-ink);
+  color: var(--color-paper);
+}
+
+/* prefers-reduced-motion 존중 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
