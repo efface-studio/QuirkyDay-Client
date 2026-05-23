@@ -3,6 +3,7 @@ import { Layout } from '@/components/Layout'
 import { Home } from '@/pages/Home'
 import { About } from '@/pages/About'
 import { Activities } from '@/pages/Activities'
+import { Shop } from '@/pages/Shop'
 import { Members } from '@/pages/Members'
 import { Contact } from '@/pages/Contact'
 import { NotFound } from '@/pages/NotFound'
@@ -14,6 +15,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="about" element={<About />} />
         <Route path="activities" element={<Activities />} />
+        <Route path="shop" element={<Shop />} />
         <Route path="members" element={<Members />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />

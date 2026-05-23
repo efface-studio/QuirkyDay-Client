@@ -9,6 +9,7 @@ export function Home() {
       <Hero />
       <IntroSection />
       <ActivitiesSection />
+      <ShopSection />
       <MembersSection />
       <ContactSection />
     </>
@@ -209,7 +210,46 @@ const activities = [
 ] as const
 
 /* ─────────────────────────────────────────────
-   4. Members 발췌
+   4. Shop teaser
+───────────────────────────────────────────── */
+function ShopSection() {
+  return (
+    <section className="border-t border-ink/10 bg-paper">
+      <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
+            03 — Shop
+          </p>
+        </Reveal>
+        <Reveal delay={0.3}>
+          <h2 className="mt-6 max-w-3xl font-display leading-[1.1] break-keep text-[clamp(2rem,4.5vw,4rem)] text-ink">
+            우리가 만든 굿즈,
+            <br />
+            <span className="text-accent">계좌이체</span>로 주문해요.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.6}>
+          <p className="mt-6 max-w-xl text-base text-ink-soft">
+            직접 디자인한 옷, 키링, 와펜을 동아리에서 제작·판매하고 있어요.
+            주문은 Instagram DM 으로, 결제는 계좌이체로.
+          </p>
+        </Reveal>
+        <Reveal delay={0.9} className="mt-10">
+          <Link
+            to="/shop"
+            className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-en text-sm text-paper hover:-translate-y-0.5"
+          >
+            굿즈 보러가기
+            <span className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   5. Members 발췌
 ───────────────────────────────────────────── */
 function MembersSection() {
   return (
@@ -217,7 +257,7 @@ function MembersSection() {
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            03 — Members
+            04 — Members
           </p>
         </Reveal>
         <Reveal delay={0.3}>
@@ -270,7 +310,7 @@ function ContactSection() {
       <div className="mx-auto max-w-7xl px-6 py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            04 — Join us
+            05 — Join us
           </p>
         </Reveal>
         <Reveal delay={0.3}>
