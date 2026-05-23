@@ -8,6 +8,7 @@ const AUTH_KEY = 'quirky.admin.auth'
 const adminNav = [
   { to: '/admin', label: 'Dashboard', icon: '◧', end: true },
   { to: '/admin/products', label: '제품 관리', icon: '◆', end: false },
+  { to: '/admin/members', label: '멤버 관리', icon: '◉', end: false },
 ] as const
 
 /**
