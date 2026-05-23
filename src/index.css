@@ -44,6 +44,18 @@ html {
   scroll-behavior: smooth;
 }
 
+/* 홈에서만 적용되는 섹션 스냅 — Home.tsx의 useEffect가 클래스 토글.
+   mandatory는 sticky sidebar + IntersectionObserver(Reveal) 와
+   충돌해서 화면이 비어 보이는 경우가 있어 proximity로 — "가까이 가면 멈춤".
+*/
+html.snap-home {
+  scroll-snap-type: y proximity;
+}
+html.snap-home .snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
 /* body에 기본 폰트 — 모든 페이지에 안전하게 적용 */
 body {
   margin: 0;
