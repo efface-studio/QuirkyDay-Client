@@ -62,6 +62,38 @@ h1, h2, h3 {
   letter-spacing: -0.01em;
 }
 
+/* ────────── Keyframes / utilities ────────── */
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 60s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* 미니멀 카드 — 두꺼운 외곽선 대신 절제된 보더 */
+.card {
+  border: 1px solid color-mix(in srgb, var(--color-ink) 12%, transparent);
+  background: var(--color-paper);
+  transition: transform 400ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 400ms ease,
+              box-shadow 400ms ease;
+}
+.card:hover {
+  border-color: color-mix(in srgb, var(--color-ink) 30%, transparent);
+  box-shadow: 0 10px 30px -10px color-mix(in srgb, var(--color-ink) 20%, transparent);
+}
+
+/* 1px 디바이더 라인 */
+.rule {
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 14%, transparent);
+}
+
 /* 선택영역 컬러 */
 ::selection {
   background: var(--color-ink);
