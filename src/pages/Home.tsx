@@ -1,10 +1,22 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useRef } from 'react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import { site } from '@/config/site'
 import { Reveal } from '@/components/motion/Reveal'
 import { SplitHeading } from '@/components/motion/SplitHeading'
+import { Parallax } from '@/components/motion/Parallax'
 import { useProducts } from '@/hooks/useProducts'
 
 export function Home() {
+  // 홈 페이지에서만 viewport 스크롤 스냅 활성화.
+  // 다른 라우트(/about, /shop ...)에는 영향 없음.
+  useEffect(() => {
+    document.documentElement.classList.add('snap-home')
+    return () => {
+      document.documentElement.classList.remove('snap-home')
+    }
+  }, [])
+
   return (
     <>
       <Hero />
@@ -21,16 +33,37 @@ export function Home() {
    1. Hero
 ───────────────────────────────────────────── */
 function Hero() {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+  // 스크롤 다운하면 hero가 약간 떠오르며 사라짐
+  const y = useTransform(scrollYProgress, [0, 1], [0, -80])
+  const opacity = useTransform(scrollYProgress, [0, 1], [1, 0])
+
   return (
-    <section id="home" className="relative min-h-screen overflow-hidden bg-paper">
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pt-32">
-        <div className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink-soft">
+    <section
+      ref={ref}
+      id="home"
+      className="snap-section relative min-h-screen overflow-hidden bg-paper"
+    >
+      <motion.div
+        style={{ y, opacity }}
+        className="mx-auto max-w-7xl px-6 pb-24 pt-24 sm:pt-32"
+      >
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-wrap items-center gap-3 font-mono text-xs uppercase tracking-widest text-ink-soft"
+        >
           <span>{site.location}</span>
           <span aria-hidden>—</span>
           <span>청소년 창업 동아리</span>
           <span aria-hidden>—</span>
           <span>Since 2024</span>
-        </div>
+        </motion.div>
 
         <SplitHeading
           text={'엉뚱한 하루,\n진짜 비즈니스가\n되다.'}
@@ -62,7 +95,24 @@ function Hero() {
             </a>
           </div>
         </Reveal>
-      </div>
+
+        {/* 스크롤 인디케이터 */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+          className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+            scroll
+          </span>
+          <motion.span
+            animate={{ y: [0, 6, 0] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
+            className="h-6 w-px bg-ink/30"
+          />
+        </motion.div>
+      </motion.div>
     </section>
   )
 }
@@ -72,7 +122,7 @@ function Hero() {
 ───────────────────────────────────────────── */
 function IntroSection() {
   return (
-    <section id="about" className="border-t border-ink/10 bg-paper">
+    <section id="about" className="snap-section border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
@@ -136,7 +186,7 @@ const introBlocks = [
 ───────────────────────────────────────────── */
 function ActivitiesSection() {
   return (
-    <section id="activities" className="bg-ink text-paper">
+    <section id="activities" className="snap-section bg-ink text-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
@@ -218,7 +268,7 @@ function ShopSection() {
   const preview = products.slice(0, 4)
 
   return (
-    <section id="shop" className="border-t border-ink/10 bg-paper">
+    <section id="shop" className="snap-section border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
@@ -249,6 +299,7 @@ function ShopSection() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {preview.map((p, i) => (
             <Reveal key={p.id} delay={i}>
+              <Parallax offset={20}>
               <Link
                 to="/shop"
                 className="card group block overflow-hidden rounded-3xl"
@@ -281,6 +332,7 @@ function ShopSection() {
                   </p>
                 </div>
               </Link>
+              </Parallax>
             </Reveal>
           ))}
         </div>
@@ -294,7 +346,7 @@ function ShopSection() {
 ───────────────────────────────────────────── */
 function MembersSection() {
   return (
-    <section id="members" className="border-t border-ink/10 bg-paper-2">
+    <section id="members" className="snap-section border-t border-ink/10 bg-paper-2">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
@@ -347,7 +399,7 @@ const roles = [
 ───────────────────────────────────────────── */
 function ContactSection() {
   return (
-    <section id="contact" className="border-t border-ink/10 bg-paper">
+    <section id="contact" className="snap-section border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
