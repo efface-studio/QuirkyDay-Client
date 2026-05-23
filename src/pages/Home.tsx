@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { site } from '@/config/site'
 import { Reveal } from '@/components/motion/Reveal'
 import { SplitHeading } from '@/components/motion/SplitHeading'
+import { useProducts } from '@/hooks/useProducts'
 
 export function Home() {
   return (
@@ -213,36 +214,76 @@ const activities = [
    4. Shop teaser
 ───────────────────────────────────────────── */
 function ShopSection() {
+  const { products } = useProducts()
+  const preview = products.slice(0, 4)
+
   return (
     <section className="border-t border-ink/10 bg-paper">
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            03 — Shop
-          </p>
-        </Reveal>
-        <Reveal delay={0.3}>
-          <h2 className="mt-6 max-w-3xl font-display leading-[1.1] break-keep text-[clamp(2rem,4.5vw,4rem)] text-ink">
-            우리가 만든 굿즈,
-            <br />
-            <span className="text-accent">계좌이체</span>로 주문해요.
-          </h2>
-        </Reveal>
-        <Reveal delay={0.6}>
-          <p className="mt-6 max-w-xl text-base text-ink-soft">
-            직접 디자인한 옷, 키링, 와펜을 동아리에서 제작·판매하고 있어요.
-            주문은 Instagram DM 으로, 결제는 계좌이체로.
-          </p>
-        </Reveal>
-        <Reveal delay={0.9} className="mt-10">
-          <Link
-            to="/shop"
-            className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 font-en text-sm text-paper hover:-translate-y-0.5"
-          >
-            굿즈 보러가기
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </Link>
-        </Reveal>
+        <div className="flex flex-wrap items-end justify-between gap-6">
+          <div>
+            <Reveal>
+              <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
+                03 — Shop
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <h2 className="mt-6 max-w-3xl font-display leading-[1.1] break-keep text-[clamp(2rem,4.5vw,4rem)] text-ink">
+                우리가 만든 굿즈,
+                <br />
+                <span className="text-accent">계좌이체</span>로 주문해요.
+              </h2>
+            </Reveal>
+          </div>
+          <Reveal delay={0.6}>
+            <Link
+              to="/shop"
+              className="group inline-flex items-center gap-2 rounded-full border border-ink/20 px-5 py-2.5 font-en text-sm text-ink hover:border-ink"
+            >
+              전체 보기
+              <span className="transition-transform group-hover:translate-x-1">→</span>
+            </Link>
+          </Reveal>
+        </div>
+
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {preview.map((p, i) => (
+            <Reveal key={p.id} delay={i}>
+              <Link
+                to="/shop"
+                className="card group block overflow-hidden rounded-3xl"
+              >
+                <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-paper-2 text-7xl">
+                  {p.images[0] ? (
+                    <img
+                      src={p.images[0]}
+                      alt={p.name}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <span aria-hidden>{p.emoji}</span>
+                  )}
+                  {p.images.length > 1 && (
+                    <span className="absolute right-3 top-3 rounded-full bg-ink/70 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-paper">
+                      +{p.images.length - 1}
+                    </span>
+                  )}
+                </div>
+                <div className="p-5">
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+                    {p.category}
+                  </p>
+                  <h3 className="mt-1 font-display text-lg text-ink">
+                    {p.name}
+                  </h3>
+                  <p className="mt-3 font-en text-base text-ink">
+                    ₩{p.price.toLocaleString('ko-KR')}
+                  </p>
+                </div>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

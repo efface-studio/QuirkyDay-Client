@@ -186,22 +186,35 @@ function ProductCard({
 }) {
   const sold = product.status === '재고소진'
   const disabled = sold || product.status === '준비중'
+  // hover 시 두 번째 이미지로 cross-fade (여러 장 있을 때만)
+  const [hoverIdx, setHoverIdx] = useState(0)
+  const hasMany = product.images.length > 1
+  const current = product.images[hoverIdx] ?? product.images[0]
 
   return (
     <motion.article
       whileHover={{ y: -4 }}
+      onMouseEnter={() => hasMany && setHoverIdx(1)}
+      onMouseLeave={() => setHoverIdx(0)}
       transition={{ type: 'spring', stiffness: 280, damping: 24 }}
       className={`card flex h-full flex-col overflow-hidden rounded-3xl ${
         sold ? 'opacity-60' : ''
       }`}
     >
-      <div className="relative flex aspect-square items-center justify-center bg-paper-2">
-        {product.image ? (
-          <img
-            src={product.image}
-            alt={product.name}
-            className="h-full w-full object-cover"
-          />
+      <div className="relative flex aspect-square items-center justify-center overflow-hidden bg-paper-2">
+        {current ? (
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={current}
+              src={current}
+              alt={product.name}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          </AnimatePresence>
         ) : (
           <span className="text-8xl" aria-hidden="true">
             {product.emoji}
@@ -210,6 +223,11 @@ function ProductCard({
         <span className="absolute left-4 top-4 rounded-full bg-paper px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-ink-soft">
           {product.status}
         </span>
+        {hasMany && (
+          <span className="absolute right-4 top-4 rounded-full bg-ink/70 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-paper">
+            +{product.images.length - 1}
+          </span>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-5">
@@ -253,6 +271,13 @@ function OrderModal({
   const [option, setOption] = useState(product.options?.[0] ?? '')
   const [qty, setQty] = useState(1)
   const [copied, setCopied] = useState(false)
+  const [imgIdx, setImgIdx] = useState(0)
+  const hasImages = product.images.length > 0
+  const hasMany = product.images.length > 1
+  const goImg = (dir: -1 | 1) =>
+    setImgIdx(
+      (i) => (i + dir + product.images.length) % product.images.length,
+    )
 
   const total = product.price * qty
   const message = [
@@ -312,6 +337,76 @@ function OrderModal({
             ✕
           </button>
         </div>
+
+        {/* 갤러리 — 이미지가 있을 때만 */}
+        {hasImages && (
+          <div className="mt-5">
+            <div className="relative aspect-square overflow-hidden rounded-2xl bg-paper-2">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={product.images[imgIdx]}
+                  src={product.images[imgIdx]}
+                  alt={`${product.name} ${imgIdx + 1}`}
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              </AnimatePresence>
+              {hasMany && (
+                <>
+                  <button
+                    type="button"
+                    onClick={() => goImg(-1)}
+                    aria-label="이전 이미지"
+                    className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-paper/85 px-3 py-2 font-en text-sm text-ink shadow-sm hover:bg-paper"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => goImg(1)}
+                    aria-label="다음 이미지"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-paper/85 px-3 py-2 font-en text-sm text-ink shadow-sm hover:bg-paper"
+                  >
+                    ›
+                  </button>
+                  <div className="absolute bottom-3 left-1/2 flex -translate-x-1/2 gap-1.5">
+                    {product.images.map((_, i) => (
+                      <button
+                        key={i}
+                        type="button"
+                        onClick={() => setImgIdx(i)}
+                        aria-label={`이미지 ${i + 1}로 이동`}
+                        className={`h-1.5 rounded-full transition-all ${
+                          i === imgIdx ? 'w-6 bg-ink' : 'w-1.5 bg-ink/30'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+            {hasMany && (
+              <div className="mt-2 flex gap-2 overflow-x-auto">
+                {product.images.map((src, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setImgIdx(i)}
+                    aria-label={`이미지 ${i + 1} 미리보기`}
+                    className={`relative h-14 w-14 shrink-0 overflow-hidden rounded-lg border-2 transition-colors ${
+                      i === imgIdx ? 'border-ink' : 'border-transparent opacity-60 hover:opacity-100'
+                    }`}
+                  >
+                    <img src={src} alt="" className="h-full w-full object-cover" />
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
 
         {product.options && (
           <div className="mt-6">

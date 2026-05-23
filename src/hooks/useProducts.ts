@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import { defaultProducts, type Product } from '@/data/products'
+import { defaultProducts, migrateProduct, type Product } from '@/data/products'
 
 const STORAGE_KEY = 'quirky.products.v1'
 
@@ -17,7 +17,9 @@ function readStorage(): Product[] | null {
     if (!raw) return null
     const parsed = JSON.parse(raw)
     if (!Array.isArray(parsed)) return null
-    return parsed as Product[]
+    return parsed
+      .map(migrateProduct)
+      .filter((p): p is Product => p !== null)
   } catch {
     return null
   }
@@ -27,7 +29,11 @@ function writeStorage(products: Product[]) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(products))
   } catch (e) {
+    // QuotaExceededError 등 — 이미지가 커서 용량 초과한 경우
     console.warn('[useProducts] localStorage write failed:', e)
+    alert(
+      'localStorage 용량을 초과했어요. 이미지를 줄이거나 일부 상품을 삭제해 주세요.',
+    )
   }
 }
 
