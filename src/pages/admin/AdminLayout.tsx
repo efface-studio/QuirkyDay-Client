@@ -80,7 +80,7 @@ export function AdminLayout() {
               Quirky Day
             </Link>
             <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-paper/50">
-              · Admin Dashboard
+              · 관리자 대시보드
             </p>
           </div>
 

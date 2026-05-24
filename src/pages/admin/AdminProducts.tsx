@@ -60,7 +60,7 @@ export function AdminProducts() {
 
   return (
     <AdminShell
-      eyebrow="Products"
+      eyebrow="제품"
       title="제품 관리"
       description="굿즈를 추가·수정·삭제하고 이미지를 등록합니다."
       actions={
@@ -290,7 +290,7 @@ function ProductEditModal({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              {isNew ? 'New product' : 'Edit product'}
+              {isNew ? '새 제품' : '제품 수정'}
             </p>
             <h2 className="mt-1 font-display text-2xl text-ink">
               {isNew ? '새 제품 추가' : draft.name || '제품 수정'}
@@ -501,7 +501,7 @@ export function ExportModal({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              Export
+              내보내기
             </p>
             <h2 className="mt-1 font-display text-2xl text-ink">{title}</h2>
             <p className="mt-2 text-sm text-ink-soft">

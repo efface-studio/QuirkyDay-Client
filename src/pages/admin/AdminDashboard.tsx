@@ -13,7 +13,7 @@ export function AdminDashboard() {
 
   return (
     <AdminShell
-      eyebrow="Dashboard"
+      eyebrow="대시보드"
       title="안녕하세요, 동아리장님."
       description="이 페이지는 동아리원의 작업 거점이에요. 좌측 메뉴에서 관리할 항목을 선택하세요."
     >
