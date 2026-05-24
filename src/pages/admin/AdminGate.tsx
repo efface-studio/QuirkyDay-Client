@@ -29,7 +29,7 @@ export function AdminGate({ onSuccess }: { onSuccess: () => void }) {
         className="w-full max-w-sm rounded-3xl border border-paper/15 bg-paper/5 p-8 backdrop-blur"
       >
         <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
-          Quirky Day · Admin
+          Quirky Day · 관리자
         </p>
         <h1 className="mt-2 font-display text-3xl text-paper">관리자 로그인</h1>
         <p className="mt-2 text-sm text-paper/70">
@@ -40,7 +40,7 @@ export function AdminGate({ onSuccess }: { onSuccess: () => void }) {
           htmlFor="admin-pin"
           className="mt-8 block font-mono text-[11px] uppercase tracking-widest text-paper/60"
         >
-          Access code
+          진입 코드
         </label>
         <input
           id="admin-pin"

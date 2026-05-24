@@ -6,7 +6,7 @@ export function Contact() {
   return (
     <>
       <PageHeader
-        eyebrow="Contact"
+        eyebrow="문의"
         title="이야기를 걸어주세요."
         description="가입 문의 · 협업 · 멘토링 제안 모두 환영합니다."
       />
@@ -22,7 +22,7 @@ export function Contact() {
                 className="card group block h-full rounded-3xl p-8"
               >
                 <p className="font-mono text-xs uppercase tracking-widest text-accent">
-                  Instagram
+                  인스타그램
                 </p>
                 <p className="mt-3 font-display text-3xl text-ink sm:text-4xl">
                   {site.instagramHandle}
@@ -40,7 +40,7 @@ export function Contact() {
             <Reveal delay={1}>
               <div className="card h-full rounded-3xl p-8">
                 <p className="font-mono text-xs uppercase tracking-widest text-accent">
-                  Offline
+                  오프라인
                 </p>
                 <p className="mt-3 font-display text-3xl text-ink sm:text-4xl">
                   {site.location}
@@ -56,7 +56,7 @@ export function Contact() {
           <Reveal delay={2} className="mt-12">
             <div className="card overflow-hidden rounded-3xl bg-ink p-10 text-paper sm:p-14">
               <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
-                Apply
+                지원하기
               </p>
               <h2 className="mt-3 font-display text-3xl leading-[1.1] sm:text-5xl">
                 가입을 고민하고 있다면.
@@ -75,7 +75,7 @@ export function Contact() {
                 rel="noreferrer"
                 className="mt-10 inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 font-en text-sm text-ink hover:-translate-y-0.5"
               >
-                Instagram으로 DM 보내기 →
+                인스타그램으로 DM 보내기 →
               </a>
             </div>
           </Reveal>

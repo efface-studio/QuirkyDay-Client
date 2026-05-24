@@ -15,7 +15,7 @@ export function Footer() {
 
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-              Pages
+              페이지
             </p>
             <ul className="mt-3 space-y-2">
               {navLinks.map((l) => (
@@ -33,7 +33,7 @@ export function Footer() {
 
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-              Follow
+              팔로우
             </p>
             <a
               href={site.instagram}
@@ -44,7 +44,7 @@ export function Footer() {
               Instagram {site.instagramHandle} →
             </a>
             <p className="mt-6 font-mono text-xs uppercase tracking-widest text-ink-mute">
-              Base
+              소속
             </p>
             <p className="mt-2 text-sm text-ink-soft">{site.location}</p>
           </div>

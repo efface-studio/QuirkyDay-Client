@@ -31,7 +31,7 @@ export function AdminMembers() {
 
   return (
     <AdminShell
-      eyebrow="Members"
+      eyebrow="멤버"
       title="멤버 관리"
       description="부원 프로필을 관리하고 순서를 정합니다."
       actions={
@@ -236,7 +236,7 @@ function MemberEditModal({
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="font-mono text-xs uppercase tracking-widest text-accent">
-              {isNew ? 'New member' : 'Edit member'}
+              {isNew ? '새 멤버' : '멤버 수정'}
             </p>
             <h2 className="mt-1 font-display text-2xl text-ink">
               {isNew ? '새 멤버 추가' : draft.name || '멤버 수정'}

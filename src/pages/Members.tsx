@@ -9,7 +9,7 @@ export function Members() {
   return (
     <>
       <PageHeader
-        eyebrow="Members"
+        eyebrow="멤버"
         title="Quirky를 만드는 사람들."
         description="다른 강점, 같은 호기심."
       />

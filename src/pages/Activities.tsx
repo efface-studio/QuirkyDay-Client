@@ -5,7 +5,7 @@ export function Activities() {
   return (
     <>
       <PageHeader
-        eyebrow="Activities"
+        eyebrow="활동"
         title="이런 걸 하고 있어요."
         description="정기 모임부터 외부 도전까지 — Quirky Day의 활동들이에요."
       />
@@ -14,7 +14,7 @@ export function Activities() {
         <div className="mx-auto max-w-5xl px-6 py-24">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-              Routine
+              정기 모임
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.1] text-ink sm:text-5xl">
               정기 활동.
@@ -49,7 +49,7 @@ export function Activities() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-              Projects
+              프로젝트
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.1] text-ink sm:text-5xl">
               우리가 만든 것들.
