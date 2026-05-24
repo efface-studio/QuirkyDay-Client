@@ -20,10 +20,10 @@ export const site = {
  * scrollspy가 점을 옮길 때 사용한다.
  */
 export const navLinks = [
-  { to: '/', label: 'Home', sectionId: 'home' },
-  { to: '/about', label: 'About', sectionId: 'about' },
-  { to: '/activities', label: 'Activities', sectionId: 'activities' },
-  { to: '/shop', label: 'Shop', sectionId: 'shop' },
-  { to: '/members', label: 'Members', sectionId: 'members' },
-  { to: '/contact', label: 'Contact', sectionId: 'contact' },
+  { to: '/', label: '홈', sectionId: 'home' },
+  { to: '/about', label: '소개', sectionId: 'about' },
+  { to: '/activities', label: '활동', sectionId: 'activities' },
+  { to: '/shop', label: '굿즈샵', sectionId: 'shop' },
+  { to: '/members', label: '멤버', sectionId: 'members' },
+  { to: '/contact', label: '문의', sectionId: 'contact' },
 ] as const
