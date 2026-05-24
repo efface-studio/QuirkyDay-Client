@@ -6,7 +6,7 @@ export function About() {
   return (
     <>
       <PageHeader
-        eyebrow="About"
+        eyebrow="소개"
         title="우리는 이런 동아리예요."
         description={`${site.location} 소속 청소년 창업 동아리, ${site.name}입니다.`}
       />
@@ -39,7 +39,7 @@ export function About() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-              Values
+              우리의 가치
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.1] text-ink sm:text-5xl">
               우리가 중요하게 여기는 것.
@@ -71,22 +71,22 @@ export function About() {
 
 const blocks = [
   {
-    eyebrow: 'Mission',
+    eyebrow: '미션',
     title: '엉뚱함을 칭찬으로.',
     body: '청소년이 떠올리는 작은 아이디어가 실제로 누군가의 문제를 해결하는 제품이 되도록 돕습니다.',
   },
   {
-    eyebrow: 'Vision',
+    eyebrow: '비전',
     title: '중구의 청소년 창업 거점.',
     body: '또래가 또래의 문제를 푸는 작은 창업가들의 커뮤니티를 만들어 갑니다.',
   },
   {
-    eyebrow: 'Base',
+    eyebrow: '소속',
     title: '중구청소년센터에서.',
     body: '센터의 공간·멘토링·네트워크를 적극 활용하며 매주 정기 모임을 합니다.',
   },
   {
-    eyebrow: 'How',
+    eyebrow: '운영',
     title: '매주 만들어 봅니다.',
     body: '브레인스토밍 → 프로토타입 → 데모데이의 사이클을 매달 굴립니다.',
   },

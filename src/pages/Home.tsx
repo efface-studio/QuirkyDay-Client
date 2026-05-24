@@ -104,7 +104,7 @@ function Hero() {
           className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
         >
           <span className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
-            scroll
+            스크롤
           </span>
           <motion.span
             animate={{ y: [0, 6, 0] }}
@@ -126,7 +126,7 @@ function IntroSection() {
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            01 — About
+            01 — 소개
           </p>
         </Reveal>
         <Reveal delay={0.4}>
@@ -165,17 +165,17 @@ function IntroSection() {
 
 const introBlocks = [
   {
-    eyebrow: 'Mission',
+    eyebrow: '미션',
     title: '엉뚱함을 칭찬으로.',
     body: '작은 아이디어가 누군가의 문제를 해결하는 제품·서비스가 되도록 돕습니다.',
   },
   {
-    eyebrow: 'Vision',
+    eyebrow: '비전',
     title: '중구의 창업 거점.',
     body: '또래가 또래의 문제를 푸는 작은 창업가들의 커뮤니티를 만들어 갑니다.',
   },
   {
-    eyebrow: 'How',
+    eyebrow: '운영',
     title: '매주 굴립니다.',
     body: '브레인스토밍 → 프로토타입 → 데모데이의 사이클을 매달 반복합니다.',
   },
@@ -190,7 +190,7 @@ function ActivitiesSection() {
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-paper/60">
-            02 — Activities
+            02 — 활동
           </p>
         </Reveal>
         <Reveal delay={0.4}>
@@ -274,7 +274,7 @@ function ShopSection() {
           <div>
             <Reveal>
               <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-                03 — Shop
+                03 — 굿즈샵
               </p>
             </Reveal>
             <Reveal delay={0.3}>
@@ -350,7 +350,7 @@ function MembersSection() {
       <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            04 — Members
+            04 — 멤버
           </p>
         </Reveal>
         <Reveal delay={0.3}>
@@ -403,7 +403,7 @@ function ContactSection() {
       <div className="mx-auto max-w-7xl px-6 py-40">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            05 — Join us
+            05 — 합류
           </p>
         </Reveal>
         <Reveal delay={0.3}>

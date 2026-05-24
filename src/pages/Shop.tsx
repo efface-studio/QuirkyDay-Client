@@ -26,7 +26,7 @@ export function Shop() {
   return (
     <>
       <PageHeader
-        eyebrow="Shop"
+        eyebrow="굿즈샵"
         title="우리가 만든 굿즈."
         description="동아리에서 직접 디자인·제작한 옷, 키링, 와펜. 수익은 다음 시즌 활동비로 돌아갑니다."
       />
@@ -35,8 +35,8 @@ export function Shop() {
       <section className="border-b border-ink/10 bg-paper-2">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-4 font-mono text-xs uppercase tracking-widest text-ink-soft sm:flex-row sm:items-center sm:justify-between">
           <p>
-            <span className="text-accent">●</span> 계좌이체 ONLY · 주문은
-            Instagram DM
+            <span className="text-accent">●</span> 계좌이체 전용 · 주문은
+            인스타그램 DM
           </p>
           <a
             href={site.instagram}
@@ -102,7 +102,7 @@ export function Shop() {
         <div className="mx-auto max-w-7xl px-6 py-24">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-              How to order
+              주문 방법
             </p>
             <h2 className="mt-3 font-display text-4xl leading-[1.1] text-ink sm:text-5xl">
               주문은 이렇게.
@@ -136,7 +136,7 @@ export function Shop() {
 
 const steps = [
   {
-    title: 'Instagram DM',
+    title: '인스타그램 DM',
     body: '상품·옵션·수량·받는 분 성함을 DM으로 보내주세요.',
   },
   {
@@ -240,7 +240,7 @@ function ProductCard({
         </p>
         {product.options && (
           <p className="mt-3 font-mono text-xs text-ink-mute">
-            opt · {product.options.join(' / ')}
+            옵션 · {product.options.join(' / ')}
           </p>
         )}
         <div className="mt-5 flex items-end justify-between">
@@ -253,7 +253,7 @@ function ProductCard({
             disabled={disabled}
             className="rounded-full bg-ink px-4 py-2 font-en text-xs text-paper hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:bg-ink/30"
           >
-            {sold ? 'Sold' : '주문하기 →'}
+            {sold ? '품절' : '주문하기 →'}
           </button>
         </div>
       </div>
@@ -483,11 +483,11 @@ function OrderModal({
             rel="noreferrer"
             className="flex-1 rounded-full bg-ink px-5 py-3 text-center font-en text-sm text-paper hover:-translate-y-0.5"
           >
-            Instagram DM 열기 →
+            인스타그램 DM 열기 →
           </a>
         </div>
         <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-ink-mute">
-          payment · 계좌이체 only
+          결제 · 계좌이체 전용
         </p>
       </motion.div>
     </motion.div>
