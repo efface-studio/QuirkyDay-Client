@@ -551,14 +551,20 @@ function PartnersSection() {
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
-            함께한 기관 · 행사
+            함께하는 기관
           </p>
-          <h2 className="mt-3 max-w-3xl font-display leading-[1.1] text-ink text-[clamp(1.75rem,4vw,3rem)]">
-            혼자가 아닌 우리예요.
+          <h2 className="mt-3 max-w-3xl font-display leading-[1.05] text-ink text-[clamp(1.75rem,4.5vw,3.5rem)]">
+            중구청소년센터와
+            <br />
+            <span className="gradient-text-cool">함께 굴러갑니다.</span>
           </h2>
+          <p className="mt-4 max-w-xl text-sm text-ink-soft">
+            중구청소년센터를 운영·감독하는 기관과, 청소년 활동·창업을 함께
+            만들어 가는 협력 기관들이에요.
+          </p>
         </Reveal>
       </div>
-      <div className="mt-10">
+      <div className="mt-12">
         <PartnersMarquee partners={partners} />
       </div>
     </section>
