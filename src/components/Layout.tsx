@@ -7,29 +7,26 @@ import { Footer } from './Footer'
 export function Layout() {
   const { pathname } = useLocation()
 
-  // 라우트 변경 시 스크롤을 최상단으로
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' })
   }, [pathname])
 
   return (
-    <div className="flex min-h-screen flex-col bg-paper">
+    <div className="min-h-screen bg-paper">
       {/*
-        외곽 컨테이너에 max-w-[88rem] (1408px) — 사이드바(192px) + 메인의
-        max-w-7xl(1280px) 가 빈틈 없이 정확히 채워지는 폭. 더 넓게 잡으면
-        페이지 mx-auto 가 사이드바와 무관하게 가운데로 흘러가 둘이 분리돼
-        보이고, 더 좁게 잡으면 페이지 콘텐츠가 답답해진다.
+        Sidebar 는 viewport 좌측에 fixed 로 떠 있고, main 은 viewport 전체 폭을
+        쓰면서 lg:pl-48 로 사이드바 폭만큼 안쪽 여백을 둔다.
+        이렇게 하면 hero 의 컬러 블록·블롭이 사이드바 뒤까지 자유롭게 흐르고,
+        사이드바와 메인 콘텐츠가 같은 시각 환경으로 묶인다.
       */}
-      <div className="mx-auto flex w-full max-w-[88rem] flex-1">
-        <Sidebar />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <Header />
-          <main className="flex-1">
-            <Outlet />
-          </main>
-        </div>
+      <Sidebar />
+      <div className="flex min-h-screen flex-col lg:pl-48">
+        <Header />
+        <main className="flex-1">
+          <Outlet />
+        </main>
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }

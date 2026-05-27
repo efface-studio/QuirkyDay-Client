@@ -59,20 +59,28 @@ function Hero() {
       id="home"
       className="snap-section noise relative isolate min-h-screen overflow-hidden bg-paper"
     >
-      {/* 배경 블롭들 — opacity 낮춰서 hero 텍스트 가리지 않게 */}
+      {/*
+        배경 블롭들 — main 이 viewport 전체 폭이라 음수 좌표로 사이드바
+        영역(좌측 0~192px) 까지 자연스럽게 흐른다.
+      */}
       <motion.div
         aria-hidden
-        className="blob-shape pointer-events-none absolute -left-40 top-20 -z-10 h-[420px] w-[420px] bg-cyan/15"
+        className="blob-shape pointer-events-none absolute -left-56 top-20 -z-10 h-[460px] w-[460px] bg-cyan/18 lg:-left-32"
       />
       <motion.div
         aria-hidden
-        className="blob-shape pointer-events-none absolute right-[-160px] bottom-[-100px] -z-10 h-[480px] w-[480px] bg-lime/20"
+        className="blob-shape pointer-events-none absolute right-[-160px] bottom-[-100px] -z-10 h-[480px] w-[480px] bg-lime/22"
         style={{ animationDelay: '-4s' }}
       />
       <motion.div
         aria-hidden
-        className="blob-shape pointer-events-none absolute right-1/4 top-1/4 -z-10 h-[280px] w-[280px] bg-magenta/10"
+        className="blob-shape pointer-events-none absolute -left-20 bottom-40 -z-10 h-[300px] w-[300px] bg-magenta/12"
         style={{ animationDelay: '-8s' }}
+      />
+      <motion.div
+        aria-hidden
+        className="blob-shape pointer-events-none absolute right-1/3 top-1/3 -z-10 h-[260px] w-[260px] bg-tangerine/10"
+        style={{ animationDelay: '-12s' }}
       />
 
       <motion.div
