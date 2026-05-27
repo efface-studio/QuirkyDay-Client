@@ -1,4 +1,10 @@
+import { motion } from 'motion/react'
 import { Marquee } from './Marquee'
+import {
+  PartnerMark,
+  type PartnerMarkShape,
+  type PartnerMarkTone,
+} from './PartnerMark'
 
 export type PartnerCategory = '운영' | '상위' | '연계' | '창업지원' | '행사'
 
@@ -7,50 +13,66 @@ export interface Partner {
   name: string
   /** 공식 사이트 URL */
   href?: string
-  /** 실제 로고 이미지 (URL 또는 dataURL). 있으면 우선 표시 */
+  /** 실제 로고 이미지 (URL 또는 dataURL). 있으면 SVG 마크 대신 표시 */
   src?: string
-  /** 로고 이미지가 없을 때 표시할 1~3글자 약자 */
+  /** 1~3글자 약자 — SVG 마크의 중앙 텍스트 */
   mark?: string
-  /** 카테고리 — 추후 그룹핑/필터링용 */
+  /** 카테고리 — 라벨로 노출 */
   category?: PartnerCategory
+  /** 마크 도형 — 카테고리 매칭이 보통 */
+  shape?: PartnerMarkShape
+  /** 마크 컬러 톤 */
+  tone?: PartnerMarkTone
 }
 
 /**
- * 무한 가로 마퀴.
- *  - 로고 이미지(src)가 있으면 그걸 표시
- *  - 없으면 약자(mark) 를 둥근 보더 캡슐로 표시 + 옆에 기관 이름
- *  - mark 도 없으면 텍스트만
- *
- * hover 시 그레이스케일 → 컬러 + 살짝 떠오름.
+ * 함께한 기관 마퀴 — 카드 형태로 흐른다.
+ * 각 카드: SVG 마크(도형+약자) + 정식 명칭 + 카테고리 라벨.
+ * hover 시 살짝 떠오름, 새 탭으로 공식 사이트 이동.
  */
 export function PartnersMarquee({ partners }: { partners: Partner[] }) {
   return (
-    <Marquee className="border-y-2 border-ink bg-paper">
+    <Marquee className="py-4">
       {partners.map((p, i) => (
-        <PartnerItem key={`${p.name}-${i}`} partner={p} />
+        <PartnerCard key={`${p.name}-${i}`} partner={p} />
       ))}
     </Marquee>
   )
 }
 
-function PartnerItem({ partner }: { partner: Partner }) {
+function PartnerCard({ partner }: { partner: Partner }) {
   const body = (
-    <div className="group flex items-center gap-3 px-8 py-7 sm:px-10 sm:py-8">
+    <motion.div
+      whileHover={{ y: -4 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+      className="group mx-3 flex items-center gap-4 rounded-2xl border-2 border-ink/15 bg-paper px-5 py-4 transition-colors hover:border-ink sm:gap-5 sm:px-6"
+    >
       {partner.src ? (
         <img
           src={partner.src}
           alt={partner.name}
-          className="h-10 w-10 object-contain opacity-60 grayscale transition group-hover:opacity-100 group-hover:grayscale-0"
+          className="h-12 w-12 shrink-0 object-contain"
         />
       ) : partner.mark ? (
-        <span className="flex h-10 min-w-10 items-center justify-center rounded-full border-2 border-ink/70 bg-paper px-2 font-display text-[13px] text-ink transition group-hover:border-magenta group-hover:bg-magenta group-hover:text-paper">
-          {partner.mark}
-        </span>
+        <PartnerMark
+          mark={partner.mark}
+          shape={partner.shape ?? 'hex'}
+          tone={partner.tone ?? 'cyan'}
+          size={48}
+        />
       ) : null}
-      <span className="whitespace-nowrap font-display text-base text-ink/60 transition-colors group-hover:text-ink sm:text-lg">
-        {partner.name}
-      </span>
-    </div>
+
+      <div className="flex flex-col justify-center">
+        {partner.category && (
+          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+            {partner.category}
+          </span>
+        )}
+        <span className="whitespace-nowrap font-display text-base text-ink transition-colors sm:text-lg">
+          {partner.name}
+        </span>
+      </div>
+    </motion.div>
   )
 
   return partner.href ? (
@@ -58,7 +80,7 @@ function PartnerItem({ partner }: { partner: Partner }) {
       href={partner.href}
       target="_blank"
       rel="noreferrer"
-      className="block transition-transform hover:-translate-y-0.5"
+      title={`${partner.name} 공식 사이트`}
     >
       {body}
     </a>
