@@ -11,6 +11,7 @@ import { Marquee } from '@/components/Marquee'
 import { Mascot } from '@/components/Mascot'
 import { MouseBlob } from '@/components/MouseBlob'
 import { TiltCard } from '@/components/TiltCard'
+import { FullBleed } from '@/components/FullBleed'
 import { useProducts } from '@/hooks/useProducts'
 import { stats } from '@/data/stats'
 import { partners } from '@/data/partners'
@@ -57,31 +58,33 @@ function Hero() {
     <section
       ref={ref}
       id="home"
-      className="snap-section noise relative isolate min-h-screen overflow-hidden bg-paper"
+      className="snap-section noise relative isolate min-h-screen overflow-visible bg-paper"
     >
       {/*
-        배경 블롭들 — main 이 viewport 전체 폭이라 음수 좌표로 사이드바
-        영역(좌측 0~192px) 까지 자연스럽게 흐른다.
+        배경 + 블롭을 FullBleed 로 감싸서 viewport 전체 폭으로 깔린다.
+        Layout 의 outer max-w 컨테이너를 뚫고 나가 사이드바 뒤까지 자연스럽게.
       */}
-      <motion.div
-        aria-hidden
-        className="blob-shape pointer-events-none absolute -left-56 top-20 -z-10 h-[460px] w-[460px] bg-cyan/18 lg:-left-32"
-      />
-      <motion.div
-        aria-hidden
-        className="blob-shape pointer-events-none absolute right-[-160px] bottom-[-100px] -z-10 h-[480px] w-[480px] bg-lime/22"
-        style={{ animationDelay: '-4s' }}
-      />
-      <motion.div
-        aria-hidden
-        className="blob-shape pointer-events-none absolute -left-20 bottom-40 -z-10 h-[300px] w-[300px] bg-magenta/12"
-        style={{ animationDelay: '-8s' }}
-      />
-      <motion.div
-        aria-hidden
-        className="blob-shape pointer-events-none absolute right-1/3 top-1/3 -z-10 h-[260px] w-[260px] bg-tangerine/10"
-        style={{ animationDelay: '-12s' }}
-      />
+      <FullBleed className="-z-10">
+        <motion.div
+          className="blob-shape absolute left-[8%] top-[10%] h-[460px] w-[460px] bg-cyan/18"
+        />
+        <motion.div
+          className="blob-shape absolute right-[-6%] bottom-[-8%] h-[480px] w-[480px] bg-lime/22"
+          style={{ animationDelay: '-4s' }}
+        />
+        <motion.div
+          className="blob-shape absolute left-[2%] bottom-[20%] h-[300px] w-[300px] bg-magenta/14"
+          style={{ animationDelay: '-8s' }}
+        />
+        <motion.div
+          className="blob-shape absolute right-[28%] top-[28%] h-[260px] w-[260px] bg-tangerine/12"
+          style={{ animationDelay: '-12s' }}
+        />
+        <motion.div
+          className="blob-shape absolute left-[36%] top-[55%] h-[240px] w-[240px] bg-purple/10"
+          style={{ animationDelay: '-6s' }}
+        />
+      </FullBleed>
 
       <motion.div
         style={{ y, opacity }}
