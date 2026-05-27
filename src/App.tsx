@@ -5,6 +5,7 @@ import { About } from '@/pages/About'
 import { Activities } from '@/pages/Activities'
 import { Shop } from '@/pages/Shop'
 import { Members } from '@/pages/Members'
+import { Recruit } from '@/pages/Recruit'
 import { Contact } from '@/pages/Contact'
 import { NotFound } from '@/pages/NotFound'
 import { AdminLayout } from '@/pages/admin/AdminLayout'
@@ -29,6 +30,7 @@ function App() {
         <Route path="activities" element={<Activities />} />
         <Route path="shop" element={<Shop />} />
         <Route path="members" element={<Members />} />
+        <Route path="recruit" element={<Recruit />} />
         <Route path="contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Route>

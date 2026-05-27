@@ -25,5 +25,6 @@ export const navLinks = [
   { to: '/activities', label: '활동', sectionId: 'activities' },
   { to: '/shop', label: '굿즈샵', sectionId: 'shop' },
   { to: '/members', label: '멤버', sectionId: 'members' },
+  { to: '/recruit', label: '모집', sectionId: 'recruit' },
   { to: '/contact', label: '문의', sectionId: 'contact' },
 ] as const

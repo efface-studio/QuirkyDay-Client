@@ -5,7 +5,12 @@ import { site } from '@/config/site'
 import { Reveal } from '@/components/motion/Reveal'
 import { SplitHeading } from '@/components/motion/SplitHeading'
 import { Parallax } from '@/components/motion/Parallax'
+import { CountUp } from '@/components/CountUp'
+import { PartnersMarquee } from '@/components/PartnersMarquee'
 import { useProducts } from '@/hooks/useProducts'
+import { stats } from '@/data/stats'
+import { partners } from '@/data/partners'
+import { recruit } from '@/data/recruit'
 
 export function Home() {
   // 홈 페이지에서만 viewport 스크롤 스냅 활성화.
@@ -20,12 +25,125 @@ export function Home() {
   return (
     <>
       <Hero />
+      <StatsStrip />
       <IntroSection />
       <ActivitiesSection />
       <ShopSection />
       <MembersSection />
+      <PartnersSection />
+      <RecruitBanner />
       <ContactSection />
     </>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   Stats strip — Hero 바로 아래의 좁은 띠
+───────────────────────────────────────────── */
+function StatsStrip() {
+  return (
+    <section className="snap-section border-y border-ink/10 bg-paper-2">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i}>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-ink-mute">
+                {s.label}
+              </p>
+              <p className="mt-2 flex items-baseline gap-1">
+                <CountUp
+                  to={s.value}
+                  prefix={s.prefix}
+                  suffix={s.suffix}
+                  className="font-display text-3xl text-ink sm:text-4xl"
+                />
+              </p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   Partners marquee
+───────────────────────────────────────────── */
+function PartnersSection() {
+  return (
+    <section className="snap-section bg-paper py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink-mute">
+            함께한 기관 · 행사
+          </p>
+          <h2 className="mt-3 max-w-3xl font-display leading-[1.1] text-ink text-[clamp(1.75rem,3.5vw,3rem)]">
+            혼자가 아닌 우리예요.
+          </h2>
+        </Reveal>
+      </div>
+      <div className="mt-10">
+        <PartnersMarquee partners={partners} />
+      </div>
+    </section>
+  )
+}
+
+/* ─────────────────────────────────────────────
+   Recruit banner — 모집 시즌 강조
+───────────────────────────────────────────── */
+function RecruitBanner() {
+  const open = recruit.status === 'open'
+  return (
+    <section className="snap-section border-t border-ink/10 bg-ink text-paper">
+      <div className="mx-auto max-w-7xl px-6 py-20 sm:py-24">
+        <Reveal>
+          <span
+            className={`inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-widest ${
+              open
+                ? 'bg-accent text-paper'
+                : 'bg-paper/15 text-paper'
+            }`}
+          >
+            <span className="inline-block h-1.5 w-1.5 animate-pulse rounded-full bg-current" />
+            {open ? '모집 중' : '곧 시작'} · {recruit.cohort}
+          </span>
+        </Reveal>
+        <Reveal delay={0.3}>
+          <h2 className="mt-6 max-w-3xl font-display leading-[1.05] text-[clamp(2.5rem,5.5vw,5.5rem)]">
+            {recruit.cohort} 부원,
+            <br />
+            <span className="text-accent">{recruit.totalSeats}명</span>을 찾고
+            있어요.
+          </h2>
+        </Reveal>
+        <Reveal delay={0.6}>
+          <p className="mt-6 max-w-xl text-base text-paper/70">
+            {recruit.scheduleStart} — {recruit.scheduleEnd}. 지원 자격은 단
+            하나, "만들어 보고 싶다." 그 한 줄.
+          </p>
+        </Reveal>
+        <Reveal delay={0.9} className="mt-8 flex flex-wrap gap-3">
+          <Link
+            to="/recruit"
+            className="group inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 font-en text-sm text-ink hover:-translate-y-0.5"
+          >
+            모집 자세히 보기
+            <span className="transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </Link>
+          <a
+            href={recruit.applyHref}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-paper/30 px-6 py-3 font-en text-sm text-paper hover:border-paper"
+          >
+            인스타 DM으로 바로 지원
+          </a>
+        </Reveal>
+      </div>
+    </section>
   )
 }
 
