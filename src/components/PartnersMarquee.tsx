@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { motion } from 'motion/react'
 import { Marquee } from './Marquee'
 import {
@@ -41,18 +42,28 @@ export function PartnersMarquee({ partners }: { partners: Partner[] }) {
 }
 
 function PartnerCard({ partner }: { partner: Partner }) {
+  // 외부 favicon 로드가 실패하면 (CORS, 사이트 다운, 404 등)
+  // 자동으로 SVG 마크로 fallback.
+  const [imgFailed, setImgFailed] = useState(false)
+  const showImg = !!partner.src && !imgFailed
+
   const body = (
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 260, damping: 18 }}
       className="group mx-3 flex items-center gap-4 rounded-2xl border-2 border-ink/15 bg-paper px-5 py-4 transition-colors hover:border-ink sm:gap-5 sm:px-6"
     >
-      {partner.src ? (
-        <img
-          src={partner.src}
-          alt={partner.name}
-          className="h-12 w-12 shrink-0 object-contain"
-        />
+      {showImg ? (
+        <div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-ink/10 bg-paper-2 p-1.5 transition-colors group-hover:border-ink/30">
+          <img
+            src={partner.src}
+            alt={`${partner.name} 로고`}
+            referrerPolicy="no-referrer"
+            loading="lazy"
+            onError={() => setImgFailed(true)}
+            className="h-full w-full object-contain"
+          />
+        </div>
       ) : partner.mark ? (
         <PartnerMark
           mark={partner.mark}
