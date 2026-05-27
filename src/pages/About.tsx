@@ -1,5 +1,7 @@
 import { PageHeader } from '@/components/PageHeader'
 import { Reveal } from '@/components/motion/Reveal'
+import { CountUp } from '@/components/CountUp'
+import { stats } from '@/data/stats'
 import { site } from '@/config/site'
 
 export function About() {
@@ -10,6 +12,34 @@ export function About() {
         title="우리는 이런 동아리예요."
         description={`${site.location} 소속 청소년 창업 동아리, ${site.name}입니다.`}
       />
+
+      {/* 통계 카운터 — 뷰포트 진입 시 0 → N */}
+      <section className="border-b border-ink/10 bg-paper">
+        <div className="mx-auto max-w-7xl px-6 py-16">
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <Reveal key={s.label} delay={i}>
+                <div>
+                  <p className="font-mono text-[11px] uppercase tracking-widest text-ink-mute">
+                    {s.label}
+                  </p>
+                  <p className="mt-3 flex items-baseline gap-1">
+                    <CountUp
+                      to={s.value}
+                      prefix={s.prefix}
+                      suffix={s.suffix}
+                      className="font-display text-5xl text-ink sm:text-6xl"
+                    />
+                  </p>
+                  {s.hint && (
+                    <p className="mt-2 text-xs text-ink-soft">{s.hint}</p>
+                  )}
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="bg-paper">
         <div className="mx-auto grid max-w-7xl grid-cols-1 sm:grid-cols-2">
