@@ -40,7 +40,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:flex lg:w-48 lg:flex-col">
+    <aside className="sticky top-0 hidden h-screen w-48 shrink-0 lg:flex lg:flex-col">
       <div className="flex h-full flex-col px-7 py-10">
         <Link to="/" className="font-display text-lg leading-none text-ink">
           {site.name}

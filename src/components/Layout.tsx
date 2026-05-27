@@ -12,21 +12,26 @@ export function Layout() {
   }, [pathname])
 
   return (
-    <div className="min-h-screen bg-paper">
+    <div className="flex min-h-screen flex-col bg-paper">
       {/*
-        Sidebar 는 viewport 좌측에 fixed 로 떠 있고, main 은 viewport 전체 폭을
-        쓰면서 lg:pl-48 로 사이드바 폭만큼 안쪽 여백을 둔다.
-        이렇게 하면 hero 의 컬러 블록·블롭이 사이드바 뒤까지 자유롭게 흐르고,
-        사이드바와 메인 콘텐츠가 같은 시각 환경으로 묶인다.
+        외곽 컨테이너에 max-w-[88rem] (1408px = 사이드바 192 + max-w-7xl 1280).
+        사이드바는 그 안에서 sticky. 콘텐츠는 사이드바와 한 max-width 안에 함께
+        정렬된다.
+
+        hero 등 페이지 섹션이 viewport 전체 폭으로 배경을 깔고 싶을 때는
+        섹션 안에서 `full-bleed` 트릭(absolute left:50% + width:100vw) 으로
+        outer 를 뚫고 나간다.
       */}
-      <Sidebar />
-      <div className="flex min-h-screen flex-col lg:pl-48">
-        <Header />
-        <main className="flex-1">
-          <Outlet />
-        </main>
-        <Footer />
+      <div className="mx-auto flex w-full max-w-[88rem] flex-1">
+        <Sidebar />
+        <div className="flex min-w-0 flex-1 flex-col">
+          <Header />
+          <main className="flex-1">
+            <Outlet />
+          </main>
+        </div>
       </div>
+      <Footer />
     </div>
   )
 }
